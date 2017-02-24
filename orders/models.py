@@ -13,6 +13,7 @@ class Item(models.Model):
 class Order(models.Model):
     orderer = models.ForeignKey('auth.User', null=True)
     orderDate = models.DateTimeField(auto_now_add=True)
+    completed = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.orderer) #str(self.orderDate)
