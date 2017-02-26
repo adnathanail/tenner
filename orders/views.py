@@ -16,7 +16,7 @@ def home(request):
 def makeOrder(request):
     return render(request, 'orders/make_order.html')
 
-def register_page(request):
+def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
