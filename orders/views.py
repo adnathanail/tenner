@@ -17,10 +17,13 @@ def makeOrder(request):
     return render(request, 'orders/make_order.html')
 
 def register(request):
+    error = ''
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(username=form.cleaned_data['username'],password=form.cleaned_data['password1'],email=form.cleaned_data['email'])
             return HttpResponseRedirect('/')
+        else:
+            error = 'Input invalid';
     form = RegistrationForm()
-    return render(request, 'registration/register.html',{'form': form})
+    return render(request, 'registration/register.html',{'form': form, 'error':error})

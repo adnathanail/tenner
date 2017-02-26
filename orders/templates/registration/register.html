@@ -6,9 +6,29 @@
 
 {% block content %}
   <h2>Register</h2>
-  <form method="post" action=".">
+  <h3 style="font-weight:bold;color:red;">{{ error }}</h3>
+  <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
+    {% for field in form %}
+      <div class="row" >
+        <div class="col-md-6">
+          {{ field.errors }}
+          {{ field.label_tag }}
+          {% if field.help_text %}
+          <p class="help">{{ field.help_text|safe }}</p>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          {{ field }}
+        </div>
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-default" aria-haspopup="true" aria-expanded="false">Register</button>
   </form>
+{% endblock %}
+
+{% block script %}
+$(document).ready(function(){
+  $('input').addClass('form-control');
+})
 {% endblock %}
