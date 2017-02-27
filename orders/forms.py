@@ -2,6 +2,9 @@ import re
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.forms import ModelForm
+from .models import *
+
 
 class RegistrationForm(forms.Form):
     username = forms.CharField(label='Username', max_length=30)
@@ -24,3 +27,8 @@ class RegistrationForm(forms.Form):
         except ObjectDoesNotExist:
             return username
         raise forms.ValidationError('Username is already taken.')
+
+class makeOrderForm(ModelForm):
+    class Meta:
+        model = OrderItem
+        fields = ['item', 'quantity']

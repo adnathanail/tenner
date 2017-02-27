@@ -6,17 +6,21 @@
 
 {% block content %}
   <h1 class="header">Orders</h1>
-  {% for order in orders %}
-    <div>
-      <h2>Orderer: {{ order.orderer }}</h2>
-      <h3>Items</h3>
-      <ul>
-        {% for orderItem in orderItems %}
-          {% if orderItem.order == order %}
-            <li>{{ orderItem }}</li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    <div>
+  {% for User in Users %}
+    {% if User.id in orderItemOrderers %}
+      <h2>{{User.username}}</h2>
+      {% for orderItem in orderItems %}
+        {% if orderItem.orderer == User %}
+          <ul>
+            <li>{{ orderItem.item }}x {{ orderItem.quantity }} - {{ orderItem.orderer }}</li>
+          </ul>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
   {% endfor %}
 {% endblock %}
+
+<!--<h2>{{ orderItem.orderer }}</h2>
+<div>
+  <h2>{{ orderItem.item }}x {{ orderItem.quantity }} - {{ orderItem.orderer }}</h2>
+<div>-->

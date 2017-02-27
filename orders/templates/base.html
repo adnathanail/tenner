@@ -35,7 +35,9 @@
           <ul class="nav navbar-nav">
             <li {% block homeActive %}{% endblock %}><a href="/">Home</a></li>
             <li {% block makeOrderActive %}{% endblock %}><a href="/makeOrder">Make an order</a></li>
-            <li {% block orderListActive %}{% endblock %}><a href="/orderList">Order list</a></li>
+            {% if group %}
+              <li {% block orderListActive %}{% endblock %}><a href="/orderList">Order list</a></li>
+            {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li {% block loginActive %}{% endblock %}><a href="/login">Login</a></li>
